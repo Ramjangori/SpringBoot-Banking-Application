@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+	<meta charset="UTF-8">
+
+	<meta name="viewport"
+	      content="width=device-width, initial-scale=1.0">
+
+	<title>RupeeFlow — Create Account</title>
+
+	<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap"
+	      rel="stylesheet">
+
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+	      rel="stylesheet">
+
+
+	<style>
+
+		:root {
+			--navy: #0a1628;
+			--blue: #1a56db;
+			--accent: #3b82f6;
+			--gold: #f5c842;
+			--green: #10b981;
+			--red: #f87171;
+			--card: #182236;
+			--border: #2a3a55;
+			--text: #e2e8f0;
+			--muted: #8a9ab5;
+		}
+
+
+		* {
+			box-sizing: border-box;
+			margin: 0;
+			padding: 0;
+		}
+
+
+		body {
+			min-height: 100vh;
+			background:
+					radial-gradient(
+							circle at 50% 0%,
+							rgba(26, 86, 219, 0.14),
+							transparent 40%
+					),
+					var(--navy);
+
+			color: var(--text);
+
+			font-family: 'DM Sans', sans-serif;
+		}
+
+
+		/* ================= HEADER ================= */
+
+		.topbar {
+
+			position: sticky;
+			top: 0;
+			z-index: 1000;
+
+			height: 68px;
+
+			padding: 0 32px;
+
+			background: rgba(24, 34, 54, 0.96);
+
+			backdrop-filter: blur(12px);
+
+			border-bottom: 1px solid var(--border);
+
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+		}
+
+
+		.brand {
+
+			display: flex;
+			align-items: center;
+
+			gap: 10px;
+
+			text-decoration: none;
+		}
+
+
+		.brand-icon {
+
+			width: 38px;
+			height: 38px;
+
+			background: var(--blue);
+
+			border-radius: 10px;
+
+			display: flex;
+			align-items: center;
+			justify-content: center;
+
+			color: white;
+
+			font-size: 18px;
+
+			box-shadow:
+					0 6px 18px rgba(26, 86, 219, 0.25);
+		}
+
+
+		.brand-name {
+
+			color: white;
+
+			font-size: 1.2rem;
+
+			font-weight: 700;
+		}
+
+
+		.brand-name span {
+
+			color: var(--gold);
+		}
+
+
+		/* ================= BACK BUTTON ================= */
+
+		.back-btn {
+
+			display: flex;
+			align-items: center;
+
+			gap: 7px;
+
+			padding: 8px 14px;
+
+			border-radius: 9px;
+
+			border: 1px solid var(--border);
+
+			background: rgba(255, 255, 255, 0.025);
+
+			color: var(--muted);
+
+			text-decoration: none;
+
+			font-size: 0.82rem;
+
+			transition: 0.2s;
+		}
+
+
+		.back-btn:hover {
+
+			color: white;
+
+			border-color: var(--accent);
+
+			background: rgba(59, 130, 246, 0.08);
+		}
+
+
+		/* ================= PAGE ================= */
+
+		.page {
+
+			width: 100%;
+
+			max-width: 520px;
+
+			margin: 0 auto;
+
+			padding: 42px 20px 60px;
+		}
+
+
+		/* ================= PAGE INTRO ================= */
+
+		.page-intro {
+
+			text-align: center;
+
+			margin-bottom: 24px;
+		}
+
+
+		.page-icon {
+
+			width: 52px;
+			height: 52px;
+
+			margin: 0 auto 12px;
+
+			border-radius: 15px;
+
+			background: rgba(59, 130, 246, 0.12);
+
+			border: 1px solid rgba(59, 130, 246, 0.2);
+
+			color: var(--accent);
+
+			display: flex;
+
+			align-items: center;
+			justify-content: center;
+
+			font-size: 1.35rem;
+		}
+
+
+		.page-intro h1 {
+
+			color: white;
+
+			font-size: 1.45rem;
+
+			font-weight: 700;
+
+			margin-bottom: 5px;
+		}
+
+
+		.page-intro p {
+
+			color: var(--muted);
+
+			font-size: 0.8rem;
+		}
+
+
+		/* ================= FORM CARD ================= */
+
+		.form-card {
+
+			background: rgba(24, 34, 54, 0.96);
+
+			border: 1px solid var(--border);
+
+			border-radius: 18px;
+
+			overflow: hidden;
+
+			box-shadow:
+					0 20px 60px rgba(0, 0, 0, 0.25);
+		}
+
+
+		/* ================= CARD TOP ================= */
+
+		.card-top {
+
+			padding: 23px 28px;
+
+			background:
+					linear-gradient(
+							135deg,
+							#1a56db,
+							#1748b8
+					);
+
+			border-bottom: 1px solid rgba(255,255,255,0.1);
+		}
+
+
+		.card-top-row {
+
+			display: flex;
+
+			align-items: center;
+
+			gap: 14px;
+		}
+
+
+		.card-top-icon {
+
+			width: 44px;
+			height: 44px;
+
+			flex-shrink: 0;
+
+			border-radius: 12px;
+
+			background: rgba(255,255,255,0.13);
+
+			border: 1px solid rgba(255,255,255,0.2);
+
+			display: flex;
+
+			align-items: center;
+			justify-content: center;
+
+			color: white;
+
+			font-size: 1.15rem;
+		}
+
+
+		.card-top h2 {
+
+			color: white;
+
+			font-size: 1.08rem;
+
+			font-weight: 700;
+
+			margin-bottom: 3px;
+		}
+
+
+		.card-top p {
+
+			color: #dbeafe;
+
+			font-size: 0.76rem;
+		}
+
+
+		/* ================= CARD BODY ================= */
+
+		.card-body {
+
+			padding: 26px 28px 28px;
+		}
+
+
+		/* ================= FORM FIELD ================= */
+
+		.field {
+
+			margin-bottom: 17px;
+		}
+
+
+		.field label {
+
+			display: block;
+
+			margin-bottom: 7px;
+
+			color: #a9b7cc;
+
+			font-size: 0.7rem;
+
+			font-weight: 600;
+
+			text-transform: uppercase;
+
+			letter-spacing: 0.45px;
+		}
+
+
+		.input-wrap {
+
+			position: relative;
+		}
+
+
+		.input-wrap i {
+
+			position: absolute;
+
+			left: 14px;
+
+			top: 50%;
+
+			transform: translateY(-50%);
+
+			color: var(--muted);
+
+			font-size: 0.98rem;
+
+			pointer-events: none;
+
+			transition: 0.2s;
+		}
+
+
+		.field input {
+
+			width: 100%;
+
+			height: 46px;
+
+			padding: 0 14px 0 40px;
+
+			background: rgba(255,255,255,0.035);
+
+			border: 1px solid var(--border);
+
+			border-radius: 10px;
+
+			outline: none;
+
+			color: var(--text);
+
+			font-family: 'DM Sans', sans-serif;
+
+			font-size: 0.86rem;
+
+			transition: 0.2s;
+		}
+
+
+		.field input::placeholder {
+
+			color: #667895;
+		}
+
+
+		.field input:hover {
+
+			border-color: #3b4d69;
+		}
+
+
+		.field input:focus {
+
+			border-color: var(--accent);
+
+			background: rgba(59,130,246,0.055);
+
+			box-shadow:
+					0 0 0 3px rgba(59,130,246,0.08);
+		}
+
+
+		.field input:focus + i {
+
+			color: var(--accent);
+		}
+
+
+		/* Remove number arrows */
+
+		input[type="number"]::-webkit-inner-spin-button,
+		input[type="number"]::-webkit-outer-spin-button {
+
+			-webkit-appearance: none;
+
+			margin: 0;
+		}
+
+
+		/* ================= PASSWORD ================= */
+
+		.password-wrap input {
+
+			padding-right: 45px;
+		}
+
+
+		.password-toggle {
+
+			position: absolute;
+
+			right: 13px;
+
+			top: 50%;
+
+			transform: translateY(-50%);
+
+			border: none;
+
+			background: transparent;
+
+			color: var(--muted);
+
+			cursor: pointer;
+
+			font-size: 1rem;
+		}
+
+
+		.password-toggle:hover {
+
+			color: white;
+		}
+
+
+		/* ================= BUTTON ================= */
+
+		.create-btn {
+
+			width: 100%;
+
+			height: 47px;
+
+			margin-top: 4px;
+
+			border: none;
+
+			border-radius: 10px;
+
+			background: var(--blue);
+
+			color: white;
+
+			font-family: 'DM Sans', sans-serif;
+
+			font-size: 0.88rem;
+
+			font-weight: 600;
+
+			cursor: pointer;
+
+			display: flex;
+
+			align-items: center;
+
+			justify-content: center;
+
+			gap: 8px;
+
+			transition: 0.2s;
+
+			box-shadow:
+					0 8px 20px rgba(26,86,219,0.2);
+		}
+
+
+		.create-btn:hover {
+
+			background: #2563eb;
+
+			transform: translateY(-1px);
+
+			box-shadow:
+					0 10px 25px rgba(26,86,219,0.28);
+		}
+
+
+		.create-btn:active {
+
+			transform: translateY(0);
+		}
+
+
+		.create-btn:disabled {
+
+			opacity: 0.6;
+
+			cursor: not-allowed;
+
+			transform: none;
+		}
+
+
+		/* ================= RESULT ================= */
+
+		#result {
+
+			margin-top: 16px;
+
+			border-radius: 10px;
+
+			padding: 12px 14px;
+
+			font-size: 0.78rem;
+
+			line-height: 1.45;
+
+			display: none;
+
+			align-items: flex-start;
+
+			gap: 8px;
+		}
+
+
+		#result.success {
+
+			display: flex;
+
+			background: rgba(16,185,129,0.08);
+
+			border: 1px solid rgba(16,185,129,0.22);
+
+			color: var(--green);
+		}
+
+
+		#result.error {
+
+			display: flex;
+
+			background: rgba(248,113,113,0.08);
+
+			border: 1px solid rgba(248,113,113,0.22);
+
+			color: var(--red);
+		}
+
+
+		/* ================= BOTTOM NOTE ================= */
+
+		.secure-note {
+
+			display: flex;
+
+			justify-content: center;
+
+			align-items: center;
+
+			gap: 6px;
+
+			margin-top: 18px;
+
+			color: var(--muted);
+
+			font-size: 0.7rem;
+		}
+
+
+		.secure-note i {
+
+			color: var(--green);
+
+			font-size: 0.8rem;
+		}
+
+
+		/* ================= MOBILE ================= */
+
+		@media (max-width: 600px) {
+
+			.topbar {
+
+				height: 62px;
+
+				padding: 0 16px;
+			}
+
+
+			.brand-icon {
+
+				width: 35px;
+				height: 35px;
+			}
+
+
+			.brand-name {
+
+				font-size: 1.05rem;
+			}
+
+
+			.back-btn {
+
+				padding: 7px 10px;
+
+				font-size: 0.75rem;
+			}
+
+
+			.page {
+
+				padding: 28px 14px 40px;
+			}
+
+
+			.page-intro {
+
+				margin-bottom: 20px;
+			}
+
+
+			.page-intro h1 {
+
+				font-size: 1.3rem;
+			}
+
+
+			.card-top {
+
+				padding: 20px;
+			}
+
+
+			.card-body {
+
+				padding: 22px 20px 24px;
+			}
+
+		}
+
+	</style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= HEADER ================= -->
+
+<nav class="topbar">
+
+	<a class="brand"
+	   href="index.html">
+
+		<div class="brand-icon">
+
+			<i class="bi bi-bank2"></i>
+
+		</div>
+
+
+		<span class="brand-name">
+
+            Rupee<span>Flow</span>
+
+        </span>
+
+	</a>
+
+
+	<a href="index.html"
+	   class="back-btn">
+
+		<i class="bi bi-arrow-left"></i>
+
+		Back to Home
+
+	</a>
+
+</nav>
+
+
+
+<!-- ================= PAGE ================= -->
+
+<main class="page">
+
+
+	<!-- PAGE INTRO -->
+
+	<div class="page-intro">
+
+		<div class="page-icon">
+
+			<i class="bi bi-person-plus-fill"></i>
+
+		</div>
+
+
+		<h1>
+
+			Create Your Account
+
+		</h1>
+
+
+		<p>
+
+			Enter your details to open a RupeeFlow account
+
+		</p>
+
+	</div>
+
+
+
+	<!-- ================= FORM CARD ================= -->
+
+	<div class="form-card">
+
+
+		<!-- CARD HEADER -->
+
+		<div class="card-top">
+
+			<div class="card-top-row">
+
+				<div class="card-top-icon">
+
+					<i class="bi bi-person-vcard-fill"></i>
+
+				</div>
+
+
+				<div>
+
+					<h2>
+
+						Account Information
+
+					</h2>
+
+
+					<p>
+
+						Please provide accurate information
+
+					</p>
+
+				</div>
+
+			</div>
+
+		</div>
+
+
+
+		<!-- CARD BODY -->
+
+		<div class="card-body">
+
+
+			<!-- HOLDER NAME -->
+
+			<div class="field">
+
+				<label>
+
+					Holder Name
+
+				</label>
+
+
+				<div class="input-wrap">
+
+					<input
+							type="text"
+							id="holderName"
+							placeholder="Enter your full name"
+							autocomplete="name"
+					>
+
+					<i class="bi bi-person"></i>
+
+				</div>
+
+			</div>
+
+
+
+			<!-- EMAIL -->
+
+			<div class="field">
+
+				<label>
+
+					Email Address
+
+				</label>
+
+
+				<div class="input-wrap">
+
+					<input
+							type="email"
+							id="email"
+							placeholder="Enter your email address"
+							autocomplete="email"
+					>
+
+					<i class="bi bi-envelope"></i>
+
+				</div>
+
+			</div>
+
+
+
+			<!-- PHONE -->
+
+			<div class="field">
+
+				<label>
+
+					Phone Number
+
+				</label>
+
+
+				<div class="input-wrap">
+
+					<input
+							type="tel"
+							id="phone"
+							placeholder="Enter 10-digit mobile number"
+							maxlength="10"
+							inputmode="numeric"
+							autocomplete="tel"
+					>
+
+					<i class="bi bi-telephone"></i>
+
+				</div>
+
+			</div>
+
+
+
+			<!-- BALANCE -->
+
+			<div class="field">
+
+				<label>
+
+					Initial Balance
+
+				</label>
+
+
+				<div class="input-wrap">
+
+					<input
+							type="number"
+							id="balance"
+							placeholder="Enter initial balance"
+							min="0"
+					>
+
+					<i class="bi bi-currency-rupee"></i>
+
+				</div>
+
+			</div>
+
+
+
+			<!-- PASSWORD -->
+
+			<div class="field">
+
+				<label>
+
+					Password
+
+				</label>
+
+
+				<div class="input-wrap password-wrap">
+
+					<input
+							type="password"
+							id="password"
+							placeholder="Create your password"
+							autocomplete="new-password"
+					>
+
+					<i class="bi bi-shield-lock-fill"></i>
+
+
+					<button
+							type="button"
+							class="password-toggle"
+							onclick="togglePassword()"
+					>
+
+						<i
+								id="passwordIcon"
+								class="bi bi-eye"
+						></i>
+
+					</button>
+
+				</div>
+
+			</div>
+
+
+
+			<!-- CREATE BUTTON -->
+
+			<button
+					type="button"
+					class="create-btn"
+					id="createBtn"
+					onclick="createAccount()"
+			>
+
+				<i class="bi bi-person-plus-fill"></i>
+
+				Create Account
+
+			</button>
+
+
+
+			<!-- RESULT -->
+
+			<div id="result"></div>
+
+
+		</div>
+
+	</div>
+
+
+
+	<!-- SECURITY NOTE -->
+
+	<div class="secure-note">
+
+		<i class="bi bi-shield-check"></i>
+
+		Your information is securely processed.
+
+	</div>
+
+
+</main>
+
+
+
+<script>
+
+
+	/* ================= PASSWORD TOGGLE ================= */
+
+	function togglePassword() {
+
+		const password =
+				document.getElementById("password");
+
+		const icon =
+				document.getElementById("passwordIcon");
+
+
+		if (password.type === "password") {
+
+			password.type = "text";
+
+			icon.className = "bi bi-eye-slash";
+
+		} else {
+
+			password.type = "password";
+
+			icon.className = "bi bi-eye";
+
+		}
+
+	}
+
+
+
+	/* ================= CREATE ACCOUNT ================= */
+
+	function createAccount() {
+
+
+		const holderName =
+				document.getElementById("holderName").value.trim();
+
+
+		const email =
+				document.getElementById("email").value.trim();
+
+
+		const phone =
+				document.getElementById("phone").value.trim();
+
+
+		const balance =
+				document.getElementById("balance").value;
+
+
+		const password =
+				document.getElementById("password").value;
+
+
+		const result =
+				document.getElementById("result");
+
+
+		const button =
+				document.getElementById("createBtn");
+
+
+
+		/* ---------- Validation ---------- */
+
+
+		if (!holderName ||
+				!email ||
+				!phone ||
+				!balance ||
+				!password) {
+
+			showError(
+					"Please fill in all fields."
+			);
+
+			return;
+		}
+
+
+		if (phone.length !== 10 ||
+				!/^[0-9]+$/.test(phone)) {
+
+			showError(
+					"Please enter a valid 10-digit phone number."
+			);
+
+			return;
+		}
+
+
+		if (!email.includes("@")) {
+
+			showError(
+					"Please enter a valid email address."
+			);
+
+			return;
+		}
+
+
+		if (password.length < 6) {
+
+			showError(
+					"Password must contain at least 6 characters."
+			);
+
+			return;
+		}
+
+
+		if (Number(balance) < 0) {
+
+			showError(
+					"Initial balance cannot be negative."
+			);
+
+			return;
+		}
+
+
+
+		/* ---------- Disable Button ---------- */
+
+		button.disabled = true;
+
+		button.innerHTML = `
+            <i class="bi bi-hourglass-split"></i>
+            Creating Account...
+        `;
+
+
+
+		/* ---------- API ---------- */
+
+		fetch("http://localhost:9090/accounts/create", {
+
+			method: "POST",
+
+			headers: {
+
+				"Content-Type":
+						"application/json"
+
+			},
+
+
+			body: JSON.stringify({
+
+				holderName: holderName,
+
+				email: email,
+
+				phone: phone,
+
+				balance: Number(balance),
+
+				password: password
+
+			})
+
+		})
+
+
+				.then(async response => {
+
+					const data =
+							await response.json();
+
+
+					if (!response.ok) {
+
+						throw new Error(
+								data.message ||
+								"Failed to create account."
+						);
+
+					}
+
+
+					return data;
+
+				})
+
+
+				.then(data => {
+
+
+					/* Save account information */
+
+					localStorage.setItem(
+							"holderName",
+							data.holderName
+					);
+
+
+					localStorage.setItem(
+							"accountNumber",
+							data.accountNumber
+					);
+
+
+
+					/* Success message */
+
+					result.className = "success";
+
+
+					result.innerHTML = `
+
+                <i class="bi bi-check-circle-fill"></i>
+
+                <div>
+
+                    <strong>
+                        Account Created Successfully!
+                    </strong>
+
+                    <br>
+
+                    Account Number:
+                    <strong>
+                        ${data.accountNumber}
+                    </strong>
+
+                    <br>
+
+                    Redirecting to login...
+
+                </div>
+
+            `;
+
+
+
+					/* Redirect */
+
+					setTimeout(() => {
+
+						window.location.replace("dashboard.html");
+
+					}, 2500);
+
+
+				})
+
+
+				.catch(error => {
+
+					console.error(error);
+
+
+					showError(
+							error.message ||
+							"Failed to create account. Please try again."
+					);
+
+
+					button.disabled = false;
+
+
+					button.innerHTML = `
+
+                <i class="bi bi-person-plus-fill"></i>
+
+                Create Account
+
+            `;
+
+				});
+
+	}
+
+
+
+	/* ================= ERROR ================= */
+
+	function showError(message) {
+
+		const result =
+				document.getElementById("result");
+
+
+		result.className = "error";
+
+
+		result.innerHTML = `
+
+            <i class="bi bi-x-circle-fill"></i>
+
+            <div>
+
+                ${message}
+
+            </div>
+
+        `;
+
+	}
+
+</script>
+
+
+</body>
+
+</html>

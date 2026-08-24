@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+  <title>RupeeFlow — Transfer Money</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+        rel="stylesheet">
+
+
+  <style>
+
+    :root {
+      --navy: #0a1628;
+      --blue: #1a56db;
+      --accent: #3b82f6;
+      --gold: #f5c842;
+      --green: #10b981;
+      --red: #f87171;
+      --card: #182236;
+      --border: #2a3a55;
+      --text: #e2e8f0;
+      --muted: #8a9ab5;
+    }
+
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+
+    body {
+
+      min-height: 100vh;
+
+      background:
+              radial-gradient(
+                      circle at 50% 0%,
+                      rgba(26, 86, 219, 0.14),
+                      transparent 40%
+              ),
+              var(--navy);
+
+      color: var(--text);
+
+      font-family: 'DM Sans', sans-serif;
+    }
+
+
+    /* ================= TOPBAR ================= */
+
+    .topbar {
+
+      position: sticky;
+
+      top: 0;
+
+      z-index: 1000;
+
+      height: 68px;
+
+      padding: 0 32px;
+
+      background: rgba(24, 34, 54, 0.96);
+
+      backdrop-filter: blur(12px);
+
+      border-bottom: 1px solid var(--border);
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+    }
+
+
+    .brand {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 10px;
+
+      text-decoration: none;
+    }
+
+
+    .brand-icon {
+
+      width: 38px;
+
+      height: 38px;
+
+      background: var(--blue);
+
+      border-radius: 10px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      color: white;
+
+      font-size: 18px;
+
+      box-shadow:
+              0 6px 18px rgba(26, 86, 219, 0.25);
+    }
+
+
+    .brand-name {
+
+      color: white;
+
+      font-size: 1.2rem;
+
+      font-weight: 700;
+    }
+
+
+    .brand-name span {
+
+      color: var(--gold);
+    }
+
+
+    /* ================= BACK BUTTON ================= */
+
+    .back-btn {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 7px;
+
+      padding: 8px 14px;
+
+      border-radius: 9px;
+
+      border: 1px solid var(--border);
+
+      background: rgba(255,255,255,0.025);
+
+      color: var(--muted);
+
+      text-decoration: none;
+
+      font-size: 0.82rem;
+
+      transition: 0.2s;
+    }
+
+
+    .back-btn:hover {
+
+      color: white;
+
+      border-color: var(--accent);
+
+      background: rgba(59,130,246,0.08);
+    }
+
+
+    /* ================= PAGE ================= */
+
+    .page {
+
+      width: 100%;
+
+      max-width: 520px;
+
+      margin: 0 auto;
+
+      padding: 40px 20px 60px;
+    }
+
+
+    /* ================= CARD ================= */
+
+    .form-card {
+
+      background: rgba(24,34,54,0.96);
+
+      border: 1px solid var(--border);
+
+      border-radius: 18px;
+
+      overflow: hidden;
+
+      box-shadow:
+              0 20px 60px rgba(0,0,0,0.25);
+    }
+
+
+    /* ================= CARD TOP ================= */
+
+    .card-top {
+
+      padding: 25px 28px;
+
+      background:
+              linear-gradient(
+                      135deg,
+                      #1a56db,
+                      #1748b8
+              );
+
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+
+    .card-top-row {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 14px;
+    }
+
+
+    .card-top-icon {
+
+      width: 46px;
+
+      height: 46px;
+
+      flex-shrink: 0;
+
+      border-radius: 13px;
+
+      background: rgba(245,200,66,0.15);
+
+      border: 1px solid rgba(245,200,66,0.25);
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      color: var(--gold);
+
+      font-size: 1.2rem;
+    }
+
+
+    .card-top h2 {
+
+      color: white;
+
+      font-size: 1.2rem;
+
+      font-weight: 700;
+
+      margin-bottom: 3px;
+    }
+
+
+    .card-top p {
+
+      color: #dbeafe;
+
+      font-size: 0.78rem;
+    }
+
+
+    /* ================= BODY ================= */
+
+    .card-body {
+
+      padding: 28px;
+    }
+
+
+    /* ================= FIELD ================= */
+
+    .field {
+
+      margin-bottom: 18px;
+    }
+
+
+    .field label {
+
+      display: block;
+
+      margin-bottom: 7px;
+
+      color: #a9b7cc;
+
+      font-size: 0.7rem;
+
+      font-weight: 600;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.45px;
+    }
+
+
+    .input-wrap {
+
+      position: relative;
+    }
+
+
+    .input-wrap > i {
+
+      position: absolute;
+
+      left: 14px;
+
+      top: 50%;
+
+      transform: translateY(-50%);
+
+      color: var(--muted);
+
+      font-size: 0.98rem;
+
+      pointer-events: none;
+    }
+
+
+    .form-input {
+
+      width: 100%;
+
+      height: 48px;
+
+      padding: 0 14px 0 40px;
+
+      background: rgba(255,255,255,0.035);
+
+      border: 1px solid var(--border);
+
+      border-radius: 10px;
+
+      outline: none;
+
+      color: var(--text);
+
+      font-family: 'DM Sans', sans-serif;
+
+      font-size: 0.88rem;
+
+      transition: 0.2s;
+    }
+
+
+    .form-input::placeholder {
+
+      color: #667895;
+    }
+
+
+    .form-input:focus {
+
+      border-color: var(--accent);
+
+      background: rgba(59,130,246,0.055);
+
+      box-shadow:
+              0 0 0 3px rgba(59,130,246,0.08);
+    }
+
+
+    /* ================= FROM ACCOUNT ================= */
+
+    .from-input {
+
+      background: rgba(59,130,246,0.07);
+
+      border-color: rgba(59,130,246,0.25);
+
+      color: #dbeafe;
+
+      cursor: not-allowed;
+    }
+
+
+    /* ================= ARROW ================= */
+
+    .arrow-divider {
+
+      display: flex;
+
+      justify-content: center;
+
+      margin: -3px 0 15px;
+    }
+
+
+    .arrow-divider span {
+
+      width: 34px;
+
+      height: 34px;
+
+      border-radius: 50%;
+
+      background: rgba(59,130,246,0.10);
+
+      border: 1px solid rgba(59,130,246,0.25);
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      color: var(--accent);
+
+      font-size: 0.9rem;
+    }
+
+
+    /* ================= AMOUNT ================= */
+
+    .amount-input {
+
+      font-size: 0.95rem;
+
+      font-weight: 500;
+    }
+
+
+    /* ================= BUTTON ================= */
+
+    .transfer-btn {
+
+      width: 100%;
+
+      height: 48px;
+
+      margin-top: 4px;
+
+      border: none;
+
+      border-radius: 10px;
+
+      background: var(--blue);
+
+      color: white;
+
+      font-family: 'DM Sans', sans-serif;
+
+      font-size: 0.9rem;
+
+      font-weight: 600;
+
+      cursor: pointer;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 8px;
+
+      transition: 0.2s;
+
+      box-shadow:
+              0 8px 20px rgba(26,86,219,0.2);
+    }
+
+
+    .transfer-btn:hover {
+
+      background: #2563eb;
+
+      transform: translateY(-1px);
+
+      box-shadow:
+              0 10px 25px rgba(26,86,219,0.28);
+    }
+
+
+    .transfer-btn:disabled {
+
+      opacity: 0.6;
+
+      cursor: not-allowed;
+
+      transform: none;
+    }
+
+
+    /* ================= RESULT ================= */
+
+    #result {
+
+      display: none;
+
+      margin-top: 16px;
+
+      padding: 13px 14px;
+
+      border-radius: 10px;
+
+      font-size: 0.78rem;
+
+      line-height: 1.45;
+
+      align-items: flex-start;
+
+      gap: 8px;
+
+      word-break: break-word;
+    }
+
+
+    #result.success {
+
+      display: flex;
+
+      background: rgba(16,185,129,0.08);
+
+      border: 1px solid rgba(16,185,129,0.22);
+
+      color: var(--green);
+    }
+
+
+    #result.error {
+
+      display: flex;
+
+      background: rgba(248,113,113,0.08);
+
+      border: 1px solid rgba(248,113,113,0.22);
+
+      color: var(--red);
+    }
+
+
+    /* ================= NOTE ================= */
+
+    .transfer-note {
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 6px;
+
+      margin-top: 18px;
+
+      color: var(--muted);
+
+      font-size: 0.7rem;
+    }
+
+
+    .transfer-note i {
+
+      color: var(--green);
+    }
+
+
+    /* ================= MOBILE ================= */
+
+    @media (max-width: 600px) {
+
+      .topbar {
+
+        height: 62px;
+
+        padding: 0 16px;
+      }
+
+
+      .brand-icon {
+
+        width: 35px;
+
+        height: 35px;
+      }
+
+
+      .brand-name {
+
+        font-size: 1.05rem;
+      }
+
+
+      .back-btn {
+
+        padding: 7px 10px;
+
+        font-size: 0.75rem;
+      }
+
+
+      .page {
+
+        padding: 28px 14px 40px;
+      }
+
+
+      .card-top {
+
+        padding: 21px;
+      }
+
+
+      .card-body {
+
+        padding: 22px 20px 24px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= TOPBAR ================= -->
+
+<nav class="topbar">
+
+  <a href="index.html"
+     class="brand">
+
+    <div class="brand-icon">
+
+      <i class="bi bi-bank2"></i>
+
+    </div>
+
+
+    <span class="brand-name">
+
+            Rupee<span>Flow</span>
+
+        </span>
+
+  </a>
+
+
+  <a href="dashboard.html"
+     class="back-btn">
+
+    <i class="bi bi-arrow-left"></i>
+
+    Back to Dashboard
+
+  </a>
+
+</nav>
+
+
+
+<!-- ================= PAGE ================= -->
+
+<main class="page">
+
+
+  <div class="form-card">
+
+
+    <!-- CARD HEADER -->
+
+    <div class="card-top">
+
+      <div class="card-top-row">
+
+        <div class="card-top-icon">
+
+          <i class="bi bi-send-fill"></i>
+
+        </div>
+
+
+        <div>
+
+          <h2>
+
+            Transfer Money
+
+          </h2>
+
+
+          <p>
+
+            Send funds securely to another account
+
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- CARD BODY -->
+
+    <div class="card-body">
+
+
+      <!-- FROM ACCOUNT -->
+
+      <div class="field">
+
+        <label>
+
+          From Account
+
+        </label>
+
+
+        <div class="input-wrap">
+
+          <i class="bi bi-person-fill"></i>
+
+
+          <input
+                  type="text"
+                  id="fromAccount"
+                  class="form-input from-input"
+                  readonly
+          >
+
+        </div>
+
+      </div>
+
+
+
+      <!-- ARROW -->
+
+      <div class="arrow-divider">
+
+                <span>
+
+                    <i class="bi bi-arrow-down"></i>
+
+                </span>
+
+      </div>
+
+
+
+      <!-- TO ACCOUNT -->
+
+      <div class="field">
+
+        <label>
+
+          To Account
+
+        </label>
+
+
+        <div class="input-wrap">
+
+          <i class="bi bi-person-check"></i>
+
+
+          <input
+                  type="text"
+                  id="toAccount"
+                  class="form-input"
+                  placeholder="Enter receiver account number"
+          >
+
+        </div>
+
+      </div>
+
+
+
+      <!-- AMOUNT -->
+
+      <div class="field">
+
+        <label>
+
+          Amount
+
+        </label>
+
+
+        <div class="input-wrap">
+
+          <i class="bi bi-currency-rupee"></i>
+
+
+          <input
+                  type="number"
+                  id="amount"
+                  class="form-input amount-input"
+                  placeholder="Enter amount"
+                  min="1"
+                  step="0.01"
+          >
+
+        </div>
+
+      </div>
+
+
+
+      <!-- TRANSFER BUTTON -->
+
+      <button
+              class="transfer-btn"
+              id="transferBtn"
+              onclick="transferMoney()"
+      >
+
+        <i class="bi bi-send-fill"></i>
+
+        Transfer Money
+
+      </button>
+
+
+
+      <!-- RESULT -->
+
+      <div id="result"></div>
+
+
+    </div>
+
+  </div>
+
+
+
+  <div class="transfer-note">
+
+    <i class="bi bi-shield-check"></i>
+
+    Transfers are securely processed through RupeeFlow.
+
+  </div>
+
+
+</main>
+
+
+
+<script>
+
+
+  /* ================= LOAD FROM ACCOUNT ================= */
+
+  window.addEventListener("DOMContentLoaded", function () {
+
+    const accountNumber =
+            localStorage.getItem("accountNumber");
+
+
+    const fromAccount =
+            document.getElementById("fromAccount");
+
+
+    if (!accountNumber) {
+
+      fromAccount.value =
+              "No account logged in";
+
+    } else {
+
+      fromAccount.value =
+              accountNumber;
+
+    }
+
+  });
+
+
+
+  /* ================= TRANSFER ================= */
+
+  function transferMoney() {
+
+
+    const fromAccount =
+            localStorage.getItem("accountNumber");
+
+
+    const toAccount =
+            document
+                    .getElementById("toAccount")
+                    .value
+                    .trim();
+
+
+    const amount =
+            document
+                    .getElementById("amount")
+                    .value;
+
+
+    const result =
+            document.getElementById("result");
+
+
+    const button =
+            document.getElementById("transferBtn");
+
+
+
+    /* ---------- Validation ---------- */
+
+    if (!fromAccount) {
+
+      showError(
+              "Please login before making a transfer."
+      );
+
+      return;
+    }
+
+
+    if (!toAccount) {
+
+      showError(
+              "Please enter receiver account number."
+      );
+
+      return;
+    }
+
+
+    if (toAccount === fromAccount) {
+
+      showError(
+              "You cannot transfer money to your own account."
+      );
+
+      return;
+    }
+
+
+    if (!amount || Number(amount) <= 0) {
+
+      showError(
+              "Please enter a valid amount."
+      );
+
+      return;
+    }
+
+
+
+    /* ---------- Loading ---------- */
+
+    button.disabled = true;
+
+
+    button.innerHTML = `
+
+            <i class="bi bi-hourglass-split"></i>
+
+            Processing Transfer...
+
+        `;
+
+
+
+    /* ---------- API ---------- */
+
+    fetch(
+            "http://localhost:9090/accounts/transfer",
+            {
+
+              method: "POST",
+
+              headers: {
+
+                "Content-Type":
+                        "application/json"
+
+              },
+
+              body: JSON.stringify({
+
+                fromAccount:
+                fromAccount,
+
+                toAccount:
+                toAccount,
+
+                amount:
+                        Number(amount)
+
+              })
+
+            }
+    )
+
+
+            .then(async response => {
+
+
+              const text =
+                      await response.text();
+
+
+              if (!response.ok) {
+
+                throw new Error(
+                        text ||
+                        "Transfer failed."
+                );
+
+              }
+
+
+              return text;
+
+            })
+
+
+            .then(message => {
+
+
+              /* ---------- SUCCESS ---------- */
+
+              result.className =
+                      "success";
+
+
+              result.innerHTML = `
+
+                <i class="bi bi-check-circle-fill"></i>
+
+                <div>
+
+                    <strong>
+                        Transfer Successful!
+                    </strong>
+
+                    <br>
+
+                    ${message}
+
+                    <br>
+
+                    Redirecting to dashboard...
+
+                </div>
+
+            `;
+
+
+              /* ---------- REDIRECT ---------- */
+
+              setTimeout(() => {
+
+                window.location.replace(
+                        "dashboard.html"
+                );
+
+              }, 1800);
+
+            })
+
+
+            .catch(error => {
+
+
+              console.error(
+                      "Transfer Error:",
+                      error
+              );
+
+
+              showError(
+                      getCleanErrorMessage(
+                              error.message
+                      )
+              );
+
+
+              button.disabled = false;
+
+
+              button.innerHTML = `
+
+                <i class="bi bi-send-fill"></i>
+
+                Transfer Money
+
+            `;
+
+            });
+
+  }
+
+
+
+  /* ================= ERROR ================= */
+
+  function showError(message) {
+
+
+    const result =
+            document.getElementById("result");
+
+
+    result.className =
+            "error";
+
+
+    result.innerHTML = `
+
+            <i class="bi bi-x-circle-fill"></i>
+
+            <div>
+
+                ${message}
+
+            </div>
+
+        `;
+
+  }
+
+
+
+  /* ================= CLEAN BACKEND ERROR ================= */
+
+  function getCleanErrorMessage(message) {
+
+
+    /*
+     * If backend returns JSON:
+     *
+     * {"message":"Insufficient balance","status":400}
+     *
+     * show only the useful message.
+     */
+
+
+    try {
+
+      const json =
+              JSON.parse(message);
+
+
+      if (json.message) {
+
+        return json.message;
+
+      }
+
+    } catch (e) {
+
+      // Not JSON
+    }
+
+
+    return message ||
+            "Something went wrong while processing the transfer.";
+
+  }
+
+</script>
+
+
+</body>
+
+</html>

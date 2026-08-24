@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>RupeeFlow — Transaction History</title>
+
+  <link
+          href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&display=swap"
+          rel="stylesheet">
+
+  <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+          rel="stylesheet">
+
+  <style>
+
+    :root {
+      --navy: #0a1628;
+      --blue: #1a56db;
+      --accent: #3b82f6;
+      --gold: #f5c842;
+      --teal: #06b6d4;
+      --green: #10b981;
+      --red: #f87171;
+      --card: #182236;
+      --border: #2a3a55;
+      --text: #e2e8f0;
+      --muted: #8a9ab5;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--navy);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      min-height: 100vh;
+    }
+
+
+    /* Topbar */
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .brand-icon {
+      width: 38px;
+      height: 38px;
+      background: var(--blue);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: #fff;
+    }
+
+    .brand-name {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .brand-name span {
+      color: var(--gold);
+    }
+
+
+    /* Back Button */
+
+    .back-btn {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 7px 14px;
+      background: var(--card);
+    }
+
+    .back-btn:hover {
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+
+    /* Page */
+
+    .page {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
+
+
+    /* Load Button */
+
+    .load-btn {
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 11px 22px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      margin-bottom: 20px;
+    }
+
+    .load-btn:hover {
+      opacity: 0.85;
+    }
+
+
+    /* Table */
+
+    .table-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow-x: auto;
+    }
+
+    .tx-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 850px;
+    }
+
+    .tx-table thead tr {
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .tx-table th {
+      padding: 12px 18px;
+      text-align: left;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .tx-table tbody tr {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .tx-table tbody tr:last-child {
+      border-bottom: none;
+    }
+
+    .tx-table tbody tr:hover {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .tx-table td {
+      padding: 13px 18px;
+      font-size: 0.87rem;
+      color: var(--text);
+    }
+
+
+    /* Credit Badge */
+
+    .badge-credit {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      color: var(--green);
+      border-radius: 20px;
+      padding: 3px 10px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+
+    /* Debit Badge */
+
+    .badge-debit {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(248, 113, 113, 0.1);
+      border: 1px solid rgba(248, 113, 113, 0.25);
+      color: var(--red);
+      border-radius: 20px;
+      padding: 3px 10px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+
+    /* Transaction Type */
+
+    .type-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      border-radius: 20px;
+      padding: 3px 10px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: capitalize;
+    }
+
+    .type-transfer {
+      background: rgba(59, 130, 246, 0.12);
+      border: 1px solid rgba(59, 130, 246, 0.25);
+      color: var(--accent);
+    }
+
+    .type-deposit {
+      background: rgba(6, 182, 212, 0.12);
+      border: 1px solid rgba(6, 182, 212, 0.25);
+      color: var(--teal);
+    }
+
+    .type-withdraw {
+      background: rgba(245, 200, 66, 0.12);
+      border: 1px solid rgba(245, 200, 66, 0.25);
+      color: var(--gold);
+    }
+
+
+    /* Amount */
+
+    .amt-cr {
+      color: var(--green) !important;
+      font-weight: 600;
+    }
+
+    .amt-dr {
+      color: var(--red) !important;
+      font-weight: 600;
+    }
+
+
+    /* Other text */
+
+    .muted {
+      color: var(--muted) !important;
+    }
+
+
+    /* Empty State */
+
+    .empty-state {
+      padding: 40px;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    .empty-state i {
+      font-size: 2rem;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+
+    /* Mobile */
+
+    @media (max-width: 600px) {
+
+      .topbar {
+        padding: 0 1rem;
+      }
+
+      .back-btn {
+        padding: 7px 9px;
+      }
+
+      .page {
+        padding: 25px 15px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+<!-- Topbar -->
+
+<nav class="topbar">
+
+  <a class="brand" href="index.html">
+
+    <div class="brand-icon">
+      <i class="bi bi-bank2"></i>
+    </div>
+
+    <span class="brand-name">
+      Rupee<span>Flow</span>
+    </span>
+
+  </a>
+
+
+  <a href="dashboard.html" class="back-btn">
+
+    <i class="bi bi-arrow-left"></i>
+
+    Back to Dashboard
+
+  </a>
+
+</nav>
+
+
+<div class="page">
+
+
+  <button class="load-btn" onclick="loadHistory()">
+
+    <i class="bi bi-clock-history"></i>
+
+    Your Transaction History
+
+  </button>
+
+
+  <div class="table-card">
+
+    <table class="tx-table">
+
+      <thead>
+
+      <tr>
+
+        <th>Type</th>
+
+        <th>Transaction</th>
+
+        <th>Amount</th>
+
+        <th>From Account</th>
+
+        <th>To Account</th>
+
+        <th>Date</th>
+
+      </tr>
+
+      </thead>
+
+
+      <tbody id="historyTable">
+
+      <tr>
+
+        <td colspan="6">
+
+          <div class="empty-state">
+
+            <i class="bi bi-clock-history"></i>
+
+            Loading transactions...
+
+          </div>
+
+        </td>
+
+      </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+
+</div>
+
+
+<script>
+
+
+  window.onload = function () {
+
+    loadHistory();
+
+  };
+
+
+  function loadHistory() {
+
+    const accountNumber =
+            localStorage.getItem("accountNumber");
+
+
+    if (!accountNumber) {
+
+      window.location.href = "dashboard.html";
+
+      return;
+    }
+
+
+    fetch(
+            "http://localhost:9090/accounts/"
+            + accountNumber
+            + "/transactions"
+    )
+
+            .then(res => {
+
+              if (!res.ok) {
+
+                throw new Error("Transaction history not found");
+
+              }
+
+              return res.json();
+
+            })
+
+
+            .then(data => {
+
+              let rows = "";
+
+
+              if (!data || data.length === 0) {
+
+                document.getElementById("historyTable").innerHTML = `
+
+                <tr>
+
+                    <td colspan="6">
+
+                        <div class="empty-state">
+
+                            <i class="bi bi-clock-history"></i>
+
+                            No Transaction Found
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+            `;
+
+                return;
+              }
+
+
+              data.forEach(t => {
+
+
+                /*
+                 * Logged in account receiver hai
+                 * to transaction CREDIT hai.
+                 */
+
+                const isCredit =
+                        t.toAccount &&
+                        t.toAccount.accountNumber === accountNumber;
+
+
+                const type =
+                        isCredit ? "CREDIT" : "DEBIT";
+
+
+                const badge =
+                        isCredit
+
+                                ?
+
+                                `<span class="badge-credit">
+
+                    <i class="bi bi-arrow-down-left"></i>
+
+                    ${type}
+
+                 </span>`
+
+                                :
+
+                                `<span class="badge-debit">
+
+                    <i class="bi bi-arrow-up-right"></i>
+
+                    ${type}
+
+                 </span>`;
+
+
+                const amtCls =
+                        isCredit ? "amt-cr" : "amt-dr";
+
+
+                const amtSign =
+                        isCredit ? "+" : "−";
+
+
+                /*
+                 * Transaction type
+                 */
+
+                let transactionType =
+                        t.type || "Transfer";
+
+
+                transactionType =
+                        transactionType.toLowerCase();
+
+
+                let typeBadge = "";
+
+
+                if (transactionType === "deposit") {
+
+                  typeBadge = `
+
+                    <span class="type-badge type-deposit">
+
+                        <i class="bi bi-wallet2"></i>
+
+                        Deposit
+
+                    </span>
+
+                `;
+
+                }
+
+                else if (
+                        transactionType === "withdrow" ||
+                        transactionType === "withdraw"
+                ) {
+
+                  typeBadge = `
+
+                    <span class="type-badge type-withdraw">
+
+                        <i class="bi bi-cash-stack"></i>
+
+                        Withdraw
+
+                    </span>
+
+                `;
+
+                }
+
+                else {
+
+                  typeBadge = `
+
+                    <span class="type-badge type-transfer">
+
+                        <i class="bi bi-arrow-left-right"></i>
+
+                        Transfer
+
+                    </span>
+
+                `;
+
+                }
+
+
+                rows += `
+
+                <tr>
+
+                    <td>
+
+                        ${badge}
+
+                    </td>
+
+
+                    <td>
+
+                        ${typeBadge}
+
+                    </td>
+
+
+                    <td class="${amtCls}">
+
+                        ${amtSign}
+
+                        ₹${Number(t.amount).toLocaleString('en-IN')}
+
+                    </td>
+
+
+                    <td class="muted">
+
+                        ${
+                        t.fromAccount
+                                ? t.fromAccount.accountNumber
+                                : "-"
+                }
+
+                    </td>
+
+
+                    <td class="muted">
+
+                        ${
+                        t.toAccount
+                                ? t.toAccount.accountNumber
+                                : "-"
+                }
+
+                    </td>
+
+
+                    <td class="muted">
+
+                        ${t.transactionDate}
+
+                    </td>
+
+                </tr>
+
+            `;
+
+              });
+
+
+              document.getElementById("historyTable").innerHTML =
+                      rows;
+
+            })
+
+
+            .catch(error => {
+
+              console.log(error);
+
+
+              document.getElementById("historyTable").innerHTML = `
+
+            <tr>
+
+                <td colspan="6">
+
+                    <div class="empty-state">
+
+                        <i class="bi bi-exclamation-circle"></i>
+
+                        No Transaction Found
+
+                    </div>
+
+                </td>
+
+            </tr>
+
+        `;
+
+            });
+
+  }
+
+
+</script>
+
+
+</body>
+
+</html>

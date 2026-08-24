@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RupeeFlow — Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<style>
+:root {
+  --navy: #0a1628;
+  --blue: #1a56db;
+  --accent: #3b82f6;
+  --gold: #f5c842;
+  --teal: #06b6d4;
+  --green: #10b981;
+  --card: #182236;
+  --border: #2a3a55;
+  --text: #e2e8f0;
+  --muted: #8a9ab5;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--navy);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  min-height: 100vh;
+}
+
+.logout-btn {
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 8px 18px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  background: #ef4444;
+  border-color: #ef4444;
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  padding: 0 2rem;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.brand-icon {
+  width: 38px;
+  height: 38px;
+  background: var(--blue);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: #fff;
+}
+
+.brand-name {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.brand-name span {
+  color: var(--gold);
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  background: var(--blue);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 14px;
+  color: #fff;
+  border: 2px solid var(--border);
+}
+
+.page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 36px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.welcome-card {
+  background: var(--blue);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 16px;
+  padding: 28px 32px;
+}
+
+.welcome-name {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 6px;
+}
+
+.welcome-acc {
+  font-size: 0.85rem;
+  color: #dbeafe;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.acc-chip {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  padding: 2px 10px;
+  font-size: 0.82rem;
+  color: #fff;
+}
+
+.guest-banner {
+  background: var(--card);
+  border: 1px dashed rgba(59, 130, 246, 0.35);
+  border-radius: 16px;
+  padding: 22px 28px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.guest-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  background: rgba(59, 130, 246, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.guest-text h4 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 3px;
+}
+
+.guest-text p {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.section-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+.action-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.action-btn {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 26px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.action-btn:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+.btn-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+}
+
+.bi-green { background: rgba(16, 185, 129, 0.15); color: var(--green); }
+.bi-yellow { background: rgba(245, 200, 66, 0.15); color: var(--gold); }
+.bi-teal { background: rgba(6, 182, 212, 0.15); color: var(--teal); }
+
+.btn-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #fff;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .action-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+</style>
+</head>
+<body>
+
+	<nav class="topbar">
+
+	  <a class="brand" href="#">
+	    <div class="brand-icon">
+	      <i class="bi bi-bank2"></i>
+	    </div>
+
+	    <span class="brand-name">
+	      Rupee<span>Flow</span>
+	    </span>
+	  </a>
+
+	  <div style="display:flex;align-items:center;gap:12px;">
+
+	      <button class="logout-btn" onclick="logout()">
+	          <i class="bi bi-box-arrow-right"></i>
+	          Logout
+	      </button>
+
+	      <div class="avatar" id="avatarEl">G</div>
+
+	  </div>
+
+	</nav>
+
+<div class="page">
+
+  <!-- Guest -->
+  <div class="guest-banner" id="guestBanner">
+    <div class="guest-icon"><i class="bi bi-person-circle"></i></div>
+    <div class="guest-text">
+      <h4>Welcome to NexaBank</h4>
+      <p>Create an account to get started with your personal banking dashboard.</p>
+    </div>
+  </div>
+
+  <!-- Logged in -->
+  <div class="welcome-card" id="welcomeBanner" style="display:none">
+    <div class="welcome-name" id="welcomeText">Welcome Guest</div>
+    <div class="welcome-acc" id="accountText"></div>
+  </div>
+
+  <!-- Actions -->
+  <div>
+    <div class="section-label">Quick Banking Services</div>
+    <div class="action-grid">
+
+     
+
+      <a href="account-details.html" class="action-btn ab-green">
+        <div class="btn-icon bi-green"><i class="bi bi-person-vcard-fill"></i></div>
+        <div class="btn-label">Account Details</div>
+      </a>
+
+      <a href="transfer-money.html" class="action-btn ab-yellow">
+        <div class="btn-icon bi-yellow"><i class="bi bi-send-fill"></i></div>
+        <div class="btn-label">Transfer Money</div>
+      </a>
+
+      <a href="transaction-history.html" class="action-btn ab-teal">
+        <div class="btn-icon bi-teal"><i class="bi bi-receipt-cutoff"></i></div>
+        <div class="btn-label">Transaction History</div>
+      </a>
+        <a href="withdrow.html" class="action-btn ab-teal">
+            <div class="btn-icon bi-teal"><i class="bi bi-cash-stack"></i></div>
+            <div class="btn-label">withdrow Money </div>
+        </a>
+        <a href="deposit.html" class="action-btn ab-teal">
+            <div class="btn-icon bi-teal"><i class="bi bi-cash-coin"></i></div>
+            <div class="btn-label">Deposit Money</div>
+        </a>
+
+    </div>
+  </div>
+
+</div>
+
+<script>
+const holderName    = localStorage.getItem("holderName");
+const accountNumber = localStorage.getItem("accountNumber");
+
+if (holderName) {
+  document.getElementById("guestBanner").style.display   = "none";
+  document.getElementById("welcomeBanner").style.display = "block";
+  document.getElementById("welcomeText").textContent     = "Welcome, " + holderName;
+  document.getElementById("accountText").innerHTML       = "Account Number &nbsp;<span class='acc-chip'>" + accountNumber + "</span>";
+  document.getElementById("avatarEl").textContent        = holderName.charAt(0).toUpperCase();
+  document.getElementById("createBtn").style.display     = "none";
+}
+
+function logout(){
+
+    localStorage.clear();
+
+    window.location.href = "index.html";
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>RupeeFlow — Deposit Money</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+            rel="stylesheet">
+
+    <style>
+
+        :root {
+            --navy: #0a1628;
+            --blue: #1a56db;
+            --card: #182236;
+            --border: #2a3a55;
+            --text: #e2e8f0;
+            --muted: #8a9ab5;
+            --green: #10b981;
+            --red: #ef4444;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: var(--navy);
+            color: var(--text);
+            font-family: 'DM Sans', sans-serif;
+            min-height: 100vh;
+        }
+
+        .topbar {
+            background: var(--card);
+            border-bottom: 1px solid var(--border);
+            padding: 0 2rem;
+            height: 68px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .brand-icon {
+            width: 38px;
+            height: 38px;
+            background: var(--blue);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+        }
+
+        .brand-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .brand-name span {
+            color: #60a5fa;
+        }
+
+        .back-btn {
+            color: var(--muted);
+            text-decoration: none;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 7px 14px;
+            background: var(--card);
+        }
+
+        .back-btn:hover {
+            color: #fff;
+            border-color: var(--blue);
+        }
+
+        .page {
+            max-width: 780px;
+            margin: 0 auto;
+            padding: 40px 24px;
+        }
+
+        .deposit-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .header-section {
+            background: var(--blue);
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header-icon {
+            font-size: 2.5rem;
+            color: #fff;
+        }
+
+        .header-section h2 {
+            color: #fff;
+            margin-top: 8px;
+            font-size: 1.6rem;
+        }
+
+        .header-section p {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.85rem;
+            margin-top: 5px;
+        }
+
+        .form-section {
+            padding: 30px;
+        }
+
+        .form-label {
+            color: var(--muted);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            margin-bottom: 7px;
+        }
+
+        .form-control {
+            width: 100%;
+            background: #101b2e;
+            border: 1px solid var(--border);
+            color: #fff;
+            border-radius: 8px;
+            padding: 12px 14px;
+            outline: none;
+            font-family: inherit;
+        }
+
+        .form-control:focus {
+            border-color: var(--blue);
+        }
+
+        .form-control::placeholder {
+            color: #60718c;
+        }
+
+        .input-group {
+            display: flex;
+        }
+
+        .currency {
+            background: #101b2e;
+            border: 1px solid var(--border);
+            border-right: none;
+            color: var(--muted);
+            padding: 12px 14px;
+            border-radius: 8px 0 0 8px;
+        }
+
+        .amount-input {
+            border-radius: 0 8px 8px 0;
+        }
+
+        .deposit-btn {
+            width: 100%;
+            border: none;
+            border-radius: 8px;
+            padding: 12px;
+            background: var(--blue);
+            color: #fff;
+            font-family: inherit;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .deposit-btn:hover {
+            opacity: 0.9;
+        }
+
+        .message {
+            margin-bottom: 20px;
+            padding: 12px 15px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        .success {
+            display: block;
+            background: rgba(16,185,129,0.12);
+            border: 1px solid rgba(16,185,129,0.3);
+            color: var(--green);
+        }
+
+        .error {
+            display: block;
+            background: rgba(239,68,68,0.12);
+            border: 1px solid rgba(239,68,68,0.3);
+            color: var(--red);
+        }
+
+        .account-info {
+            background: #101b2e;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 14px;
+            margin-bottom: 22px;
+        }
+
+        .account-info .label {
+            color: var(--muted);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+        }
+
+        .account-info .value {
+            color: #fff;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 500px) {
+
+            .topbar {
+                padding: 0 1rem;
+            }
+
+            .back-btn {
+                padding: 6px 9px;
+            }
+
+            .back-btn {
+                font-size: 0;
+            }
+
+            .back-btn i {
+                font-size: 1rem;
+            }
+
+            .form-section {
+                padding: 22px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<nav class="topbar">
+
+    <a class="brand" href="index.html">
+
+        <div class="brand-icon">
+            <i class="bi bi-bank2"></i>
+        </div>
+
+        <span class="brand-name">
+      Rupee<span>Flow</span>
+    </span>
+
+    </a>
+
+    <a href="dashboard.html" class="back-btn">
+        <i class="bi bi-arrow-left"></i>
+        Back to Dashboard
+    </a>
+
+</nav>
+
+
+<div class="page">
+
+    <div class="deposit-card">
+
+        <div class="header-section">
+
+            <i class="bi bi-cash-coin header-icon"></i>
+
+            <h2>Deposit Money</h2>
+
+            <p>Add money to your account</p>
+
+        </div>
+
+
+        <div class="form-section">
+
+            <div id="message" class="message"></div>
+
+
+            <!-- Logged in account -->
+            <div class="account-info">
+
+                <div class="label">
+                    Account Number
+                </div>
+
+                <div class="value" id="accountNumber">
+                    Loading...
+                </div>
+
+            </div>
+
+
+            <form id="depositForm">
+
+                <div class="form-group">
+
+                    <label class="form-label">
+                        Amount
+                    </label>
+
+                    <div class="input-group">
+
+                        <span class="currency">₹</span>
+
+                        <input
+                                type="number"
+                                id="amount"
+                                class="form-control amount-input"
+                                placeholder="Enter amount"
+                                min="1"
+                                required>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label class="form-label">
+                        Password
+                    </label>
+
+                    <input
+                            type="password"
+                            id="password"
+                            class="form-control"
+                            placeholder="Enter your password"
+                            required>
+
+                </div>
+
+
+                <button type="submit" class="deposit-btn">
+
+                    <i class="bi bi-cash-coin"></i>
+                    Deposit Money
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    const accountNumber =
+        localStorage.getItem("accountNumber");
+
+
+    if (!accountNumber) {
+
+        window.location.href = "dashboard.html";
+
+    } else {
+
+        document.getElementById("accountNumber").textContent =
+            accountNumber;
+    }
+
+
+    document.getElementById("depositForm")
+        .addEventListener("submit", async function(event) {
+
+            event.preventDefault();
+
+            const amount =
+                document.getElementById("amount").value;
+
+            const password =
+                document.getElementById("password").value;
+
+            const message =
+                document.getElementById("message");
+
+
+            message.className = "message";
+            message.textContent = "";
+
+
+            try {
+
+                const response = await fetch(
+                    `http://localhost:9090/accounts/deposit?acc=${encodeURIComponent(accountNumber)}&amount=${encodeURIComponent(amount)}&password=${encodeURIComponent(password)}`,
+                    {
+                        method: "POST"
+                    }
+                );
+
+
+                const contentType =
+                    response.headers.get("content-type");
+
+
+                let data;
+
+
+                if (contentType && contentType.includes("application/json")) {
+
+                    data = await response.json();
+
+                } else {
+
+                    data = await response.text();
+
+                }
+
+
+                if (!response.ok) {
+
+                    message.className = "message error";
+
+                    message.textContent =
+                        data.message || data || "Deposit failed.";
+
+                    return;
+                }
+
+
+                message.className = "message success";
+
+                message.textContent = data;
+
+                document.getElementById("depositForm").reset();
+                setTimeout(()=> location.replace("dashboard.html"),1500);
+
+            }
+            catch(error) {
+
+                message.className = "message error";
+
+                message.textContent =
+                    "Something went wrong. Please try again.";
+
+            }
+
+        });
+
+</script>
+
+</body>
+</html>

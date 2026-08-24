@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+  <title>RupeeFlow — Banking</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+        rel="stylesheet">
+
+
+  <style>
+
+    :root {
+      --navy: #0a1628;
+      --blue: #1a56db;
+      --accent: #3b82f6;
+      --gold: #f5c842;
+      --green: #10b981;
+      --card: #182236;
+      --border: #2a3a55;
+      --text: #e2e8f0;
+      --muted: #8a9ab5;
+    }
+
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+
+    body {
+
+      background: var(--navy);
+
+      color: var(--text);
+
+      font-family: 'DM Sans', sans-serif;
+
+      min-height: 100vh;
+    }
+
+
+    /* ================= HEADER ================= */
+
+    .topbar {
+
+      position: fixed;
+
+      top: 0;
+      left: 0;
+
+      width: 100%;
+
+      height: 68px;
+
+      background: var(--card);
+
+      border-bottom: 1px solid var(--border);
+
+      padding: 0 2rem;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      z-index: 1000;
+    }
+
+
+    .brand {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 10px;
+
+      text-decoration: none;
+    }
+
+
+    .brand-icon {
+
+      width: 38px;
+      height: 38px;
+
+      background: var(--blue);
+
+      border-radius: 10px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      font-size: 18px;
+
+      color: white;
+    }
+
+
+    .brand-name {
+
+      font-size: 1.2rem;
+
+      font-weight: 700;
+
+      color: white;
+    }
+
+
+    .brand-name span {
+
+      color: var(--gold);
+    }
+
+
+    /* ================= MAIN ================= */
+
+    .page {
+
+      min-height: 100vh;
+
+      max-width: 900px;
+
+      margin: 0 auto;
+
+      padding: 120px 24px 50px;
+
+      display: flex;
+
+      flex-direction: column;
+
+      justify-content: center;
+    }
+
+
+    /* ================= HERO ================= */
+
+    .hero {
+
+      text-align: center;
+
+      margin-bottom: 42px;
+    }
+
+
+    .hero-icon {
+
+      width: 64px;
+
+      height: 64px;
+
+      margin: 0 auto 18px;
+
+      border-radius: 18px;
+
+      background: var(--blue);
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      font-size: 1.7rem;
+
+      color: white;
+
+      box-shadow: 0 10px 30px rgba(26, 86, 219, 0.25);
+    }
+
+
+    .hero h1 {
+
+      font-size: 2rem;
+
+      font-weight: 700;
+
+      color: white;
+
+      margin-bottom: 8px;
+    }
+
+
+    .hero h1 span {
+
+      color: var(--gold);
+    }
+
+
+    .hero p {
+
+      color: var(--muted);
+
+      font-size: 0.9rem;
+
+      max-width: 500px;
+
+      margin: auto;
+
+      line-height: 1.6;
+    }
+
+
+    /* ================= SECTION ================= */
+
+    .section-label {
+
+      font-size: 0.72rem;
+
+      font-weight: 600;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.6px;
+
+      color: var(--muted);
+
+      margin-bottom: 12px;
+    }
+
+
+    /* ================= ACTION GRID ================= */
+
+    .action-grid {
+
+      display: grid;
+
+      grid-template-columns: repeat(2, 1fr);
+
+      gap: 18px;
+    }
+
+
+    /* ================= ACTION CARD ================= */
+
+    .action-btn {
+
+      background: var(--card);
+
+      border: 1px solid var(--border);
+
+      border-radius: 16px;
+
+      padding: 28px;
+
+      min-height: 190px;
+
+      text-decoration: none;
+
+      display: flex;
+
+      flex-direction: column;
+
+      justify-content: center;
+
+      gap: 16px;
+
+      transition: all 0.25s ease;
+    }
+
+
+    .action-btn:hover {
+
+      transform: translateY(-4px);
+
+      border-color: var(--accent);
+
+      background: #1b2940;
+
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+    }
+
+
+    /* ================= ICON ================= */
+
+    .btn-icon {
+
+      width: 52px;
+
+      height: 52px;
+
+      border-radius: 14px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      font-size: 1.35rem;
+    }
+
+
+    .bi-blue {
+
+      color: var(--accent);
+
+      background: rgba(59, 130, 246, 0.12);
+
+      border: 1px solid rgba(59, 130, 246, 0.2);
+    }
+
+
+    .bi-green {
+
+      color: var(--green);
+
+      background: rgba(16, 185, 129, 0.12);
+
+      border: 1px solid rgba(16, 185, 129, 0.2);
+    }
+
+
+    /* ================= CARD TEXT ================= */
+
+    .btn-label {
+
+      font-size: 1rem;
+
+      font-weight: 600;
+
+      color: white;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+    }
+
+
+    .btn-description {
+
+      color: var(--muted);
+
+      font-size: 0.78rem;
+
+      line-height: 1.5;
+
+      margin-top: -8px;
+    }
+
+
+    .arrow {
+
+      color: var(--muted);
+
+      font-size: 1rem;
+
+      transition: 0.2s;
+    }
+
+
+    .action-btn:hover .arrow {
+
+      color: white;
+
+      transform: translateX(4px);
+    }
+
+
+    /* ================= FOOTER TEXT ================= */
+
+    .footer-note {
+
+      text-align: center;
+
+      color: var(--muted);
+
+      font-size: 0.72rem;
+
+      margin-top: 30px;
+    }
+
+
+    .footer-note i {
+
+      color: var(--green);
+
+      margin-right: 4px;
+    }
+
+
+    /* ================= MOBILE ================= */
+
+    @media (max-width: 600px) {
+
+      .topbar {
+
+        padding: 0 1rem;
+
+        height: 62px;
+      }
+
+
+      .brand-icon {
+
+        width: 35px;
+
+        height: 35px;
+      }
+
+
+      .brand-name {
+
+        font-size: 1.05rem;
+      }
+
+
+      .page {
+
+        padding: 100px 16px 35px;
+      }
+
+
+      .hero {
+
+        margin-bottom: 30px;
+      }
+
+
+      .hero-icon {
+
+        width: 56px;
+
+        height: 56px;
+
+        font-size: 1.4rem;
+      }
+
+
+      .hero h1 {
+
+        font-size: 1.6rem;
+      }
+
+
+      .hero p {
+
+        font-size: 0.8rem;
+      }
+
+
+      .action-grid {
+
+        grid-template-columns: 1fr;
+
+        gap: 14px;
+      }
+
+
+      .action-btn {
+
+        min-height: 150px;
+
+        padding: 22px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= HEADER ================= -->
+
+<nav class="topbar">
+
+  <a href="index.html"
+     class="brand">
+
+    <div class="brand-icon">
+
+      <i class="bi bi-bank2"></i>
+
+    </div>
+
+
+    <span class="brand-name">
+
+                Rupee<span>Flow</span>
+
+            </span>
+
+  </a>
+
+</nav>
+
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="page">
+
+
+  <!-- HERO -->
+
+  <div class="hero">
+
+    <div class="hero-icon">
+
+      <i class="bi bi-bank2"></i>
+
+    </div>
+
+
+    <h1>
+
+      Welcome to
+      <span>RupeeFlow</span>
+
+    </h1>
+
+
+    <p>
+
+      Simple, secure and convenient banking.
+      Create a new account or access your
+      existing account.
+
+    </p>
+
+  </div>
+
+
+
+  <!-- ================= OPTIONS ================= -->
+
+  <div>
+
+    <div class="section-label">
+
+      Banking Services
+
+    </div>
+
+
+    <div class="action-grid">
+
+
+      <!-- CREATE ACCOUNT -->
+
+      <a href="create-account.html"
+         class="action-btn">
+
+        <div class="btn-icon bi-blue">
+
+          <i class="bi bi-person-plus-fill"></i>
+
+        </div>
+
+
+        <div class="btn-label">
+
+          Create Account
+
+          <i class="bi bi-arrow-right arrow"></i>
+
+        </div>
+
+
+        <div class="btn-description">
+
+          Open a new RupeeFlow bank account
+          and start your banking journey.
+
+        </div>
+
+      </a>
+
+
+
+      <!-- LOGIN / EXISTING ACCOUNT -->
+
+      <a href="addAccount.html"
+         class="action-btn">
+
+        <div class="btn-icon bi-green">
+
+          <i class="bi bi-box-arrow-in-right"></i>
+
+        </div>
+
+
+        <div class="btn-label">
+
+          Login / Existing Account
+
+          <i class="bi bi-arrow-right arrow"></i>
+
+        </div>
+
+
+        <div class="btn-description">
+
+          Access your existing account using
+          your account number and password.
+
+        </div>
+
+      </a>
+
+
+    </div>
+
+  </div>
+
+
+
+  <!-- FOOTER -->
+
+  <div class="footer-note">
+
+    <i class="bi bi-shield-check"></i>
+
+    Your banking experience is safe and secure.
+
+  </div>
+
+
+</main>
+
+
+</body>
+
+</html>
