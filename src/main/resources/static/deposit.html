@@ -416,7 +416,7 @@
             try {
 
                 const response = await fetch(
-                    `http://localhost:9090/accounts/deposit?acc=${encodeURIComponent(accountNumber)}&amount=${encodeURIComponent(amount)}&password=${encodeURIComponent(password)}`,
+                    `/accounts/deposit?acc=${encodeURIComponent(accountNumber)}&amount=${encodeURIComponent(amount)}&password=${encodeURIComponent(password)}`,
                     {
                         method: "POST"
                     }
